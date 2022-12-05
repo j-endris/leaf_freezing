@@ -34,3 +34,4 @@ adjusted_injury_percent$injury -> ifelse (adjusted_injury_percent$injury<0,0,adj
 
 #I need to figure out how to loop back to appropriate controls for each replicate
 #i.e. how to call to the specific -40 control without writing it for each individual
+
