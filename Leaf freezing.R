@@ -1,6 +1,6 @@
 ##R code to to analyze freezing resistance##
 ##In line with Lim et al 1998##
-
+##by Joe Endris##
 
 library(dplyr)
 library(dtplyr)
@@ -33,6 +33,6 @@ adjusted_injury_percent$injury -> ifelse (adjusted_injury_percent$injury<0,0,adj
 
 #Current Issues
 #I need to figure out how to loop back to appropriate controls for each replicate, not just call to a specific cell
-#code for absolute numbers isnt working correctly
+#code for absolute numbers isn't working correctly
 
 
