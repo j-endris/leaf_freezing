@@ -9,6 +9,8 @@ library(ggplot2)
 library(ggfortify)
 
 setwd("~/Library/CloudStorage/GoogleDrive-jendris@my.apsu.edu/.shortcut-targets-by-id/1p5eHgH8eX9-QjkyyA3uRz5Lk7ontMZtO/Rehm lab - General/Trees/1- Freezing/Data/")
+#for Evan's data
+#raw_data<-read.csv("/Volumes/GoogleDrive/My Drive/Rehm lab - General/Trees/1- Freezing/Data/scrap.csv")
 
 raw_data <- read.csv("scrap.csv")
 
@@ -23,7 +25,7 @@ leakage_percent <- mutate(freeze_data, leakage = ((adjusted_elec1/adjusted_elec2
 injury_percent <- mutate (leakage_percent, injury = ((leakage-leakage_percent[1,13])/(100-leakage_percent[1,13])*100))
 
 #force any negative numbers in injury to be positive
-injury_percent$injury -> ifelse (injury_percent$injury<0,0,injury_percent$injury)
+injury_percent$injury <- ifelse(injury_percent$injury<0,0,injury_percent$injury)
 
 #calculate adjusted injury (injury/injury(-40)) x 100
 adjusted_injury_percent <- mutate (injury_percent, adjusted_injury = (injury/injury_percent[6,14])*100)
@@ -34,10 +36,13 @@ adjusted_injury_percent$injury -> if_else (adjusted_injury_percent$injury<0,0,ad
 #Current Issues
 #I need to figure out how to loop back to appropriate controls for each replicate, not just call to a specific cell
 #is this where I need to run a loop?
+#Yes you likely need to run a loop, dividing out each individual by the unique ID column you created
 
 #code for absolute numbers isn't working correctly; 
 #returns error Error in ifelse(injury_percent$injury < 0, 0, NA) <- injury_percent$injury : 
 #could not find function "ifelse<-"
+#the function is simply ifelse() not if_else()
+#you also had -> instead of <- which will cause the error. I corrected it in line 28 but you can see those errors in line 34.
 
 
 
