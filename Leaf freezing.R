@@ -29,13 +29,15 @@ injury_percent$injury -> ifelse (injury_percent$injury<0,0,injury_percent$injury
 adjusted_injury_percent <- mutate (injury_percent, adjusted_injury = (injury/injury_percent[6,14])*100)
 
 #force any negative numbers in adjusted_injury to be positive
-adjusted_injury_percent$injury -> ifelse (adjusted_injury_percent$injury<0,0,adjusted_injury_percent$injury)
+adjusted_injury_percent$injury -> if_else (adjusted_injury_percent$injury<0,0,adjusted_injury_percent$injury)
 
 #Current Issues
 #I need to figure out how to loop back to appropriate controls for each replicate, not just call to a specific cell
-#code for absolute numbers isn't working correctly
+#is this where I need to run a loop?
 
-
+#code for absolute numbers isn't working correctly; 
+#returns error Error in ifelse(injury_percent$injury < 0, 0, NA) <- injury_percent$injury : 
+#could not find function "ifelse<-"
 
 
 
