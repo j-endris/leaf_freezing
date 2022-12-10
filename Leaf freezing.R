@@ -2,6 +2,8 @@
 ##In line with Lim et al 1998##
 ##by Joe Endris##
 
+##change raw .csv file to actual data when time to analyze 
+
 library(dplyr)
 library(dtplyr)
 library(data.table)
