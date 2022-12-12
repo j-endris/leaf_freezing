@@ -67,7 +67,9 @@ adj_injury_percent$adjInj<-round(adj_injury_percent$adjInj,2)
 adj_injury_percent$injury <- if_else (adj_injury_percent$injury<0,0,adj_injury_percent$injury)
 
 
-
+#to do worklist
+#1 determine use of wonky individuals
+#2 
 
 
 
