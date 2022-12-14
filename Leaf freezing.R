@@ -16,7 +16,7 @@ setwd("~/Library/CloudStorage/GoogleDrive-jendris@my.apsu.edu/.shortcut-targets-
 #for Evan's data
 raw_data<-read.csv("/Volumes/GoogleDrive/My Drive/Rehm lab - General/Trees/1- Freezing/Data/freezing_data.csv")
 
-raw_data <- read.csv("scrap.csv")
+raw_data <- read.csv("freezing_data practice.csv")
 
 #create an unique ID for each tree species/number/temp/date
 freeze_data <- mutate(raw_data, Unique_ID = paste(Date.Collected, Spec,State,Num, sep = "."))
