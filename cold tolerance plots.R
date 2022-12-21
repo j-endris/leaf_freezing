@@ -84,12 +84,15 @@ grid.arrange(g1,g2,g3,nrow=1)
   # theme_bw()
 
 #scatterplot with time as the X axis
-outputs$Date <- mdy(outputs$Date)
+outputs$Date <- ymd(outputs$Date)
+class(outputs$Date)
 
-outputs_date <- group_by(outputs, Date) +
-  summarise(LT15= mean(LT15), LT50=mean(LT50), LT95=mean(LT95))
+outputs_date <- outputs%>%
+  group_by(Date, Species) %>%
+  summarise(LT15.m=mean(LT15), LT50.m=mean(LT50), LT95.m=mean(LT95))
 
-ggplot(outputs, aes(x= Date,y=LT50, color= Species)) +
+ggplot(outputs_date, aes(x= Date,y=LT50.m, color= Species)) +
+  geom_point()+
   xlab ("Date")+
   ylab ("Temperature (C)")+
   theme_bw()
@@ -113,13 +116,13 @@ BA_loc_plot <- ggplot(outputs_LF, aes(x=Location, y=LT50_mean, color=Species, la
   xlab ("Location") +
   ylab ("Temperature (C)")+
   theme_grey()
-  theme(legend.position="none")
 
 BA_species_plot <- ggplot(outputs_LF, aes(x=Species, y=LT50_mean, color=last_freeze))+
   geom_point(position=position_dodge(0.5))+
   geom_errorbar(aes(ymax=LT50_mean+LT50_se,ymin=LT50_mean-LT50_se), position=position_dodge(0.5))+
   xlab ("Species") +
   ylab ("Temperature (C)")+
+  facet_wrap(~Location)+
   theme_grey()
 
 BA_loc_plot
