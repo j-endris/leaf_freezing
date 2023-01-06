@@ -11,15 +11,18 @@ library(ggplot2)
 library(ggfortify)
 library(tidyr)
 library(minpack.lm)#contains the nlsLM function we need for the gompertz
+library(readxl)
+library(writexl)
+
 
 setwd("~/Library/CloudStorage/GoogleDrive-jendris@my.apsu.edu/.shortcut-targets-by-id/1p5eHgH8eX9-QjkyyA3uRz5Lk7ontMZtO/Rehm lab - General/Trees/1- Freezing/Data/")
 #for Evan's data
-raw_data<-read.csv("/Volumes/GoogleDrive/My Drive/Rehm lab - General/Trees/1- Freezing/Data/freezing_data.csv")
+raw_data<-read_excel("/Volumes/GoogleDrive/My Drive/Rehm lab - General/Trees/1- Freezing/Data/Freezing Data.xlsx")
 
 raw_data <- read.csv("freezing_data practice.csv")
 
 #create an unique ID for each tree species/number/temp/date
-freeze_data <- mutate(raw_data, Unique_ID = paste(Date.Collected, Spec,State,Num, sep = "."))
+freeze_data <- mutate(raw_data, Unique_ID = paste(Date_Collected, Spec,State,Num, sep = "."))
 
 #calculate leakage (initial leakage/final leakage) x 100
 freeze_data<-mutate(freeze_data, leakage = ((adjusted_elec1/adjusted_elec2)*100))
@@ -150,3 +153,5 @@ for (i in 1:length(b)){
 }
 LT$LT95<-LT95.temp
 
+#write LT values to the file
+write_xlsx(LT, "/Volumes/GoogleDrive/My Drive/Rehm lab - General/Trees/1- Freezing/Data/LT50 master.xlsx")
